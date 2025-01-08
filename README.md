@@ -16,7 +16,9 @@ pip install numpy pyyaml
 ```
 
 ### Data Preparation
-To estimate your LeetCode rating, you need to prepare your problem-solving data and place it in the `/data` directory. The data should be in one of the following formats:
+To estimate your LeetCode rating, you need to prepare your problem-solving data and place it in the `/data` directory. 
+You can find the problem rating [here](https://zerotrac.github.io/leetcode_problem_rating/#/)
+The data should be in one of the following formats:
 
 #### YAML Format
 - File name: `questions_data.yaml`
@@ -24,7 +26,7 @@ To estimate your LeetCode rating, you need to prepare your problem-solving data 
 - Data format:
   - The file should contain a list of dictionaries under the key `data`.
   - Each dictionary should have two keys:
-    - `problem_rating`: The problem's rating (an integer between 1300 and 1900).
+    - `problem_rating`: The problem's rating.
     - `passed`: A boolean value (`true` or `false`) indicating whether you passed the problem.
 
 Example:
@@ -43,7 +45,7 @@ data:
 - File location: `/data/questions_data.csv`
 - Data format:
   - Each row represents a problem you have attempted.
-  - The first column is the problem's rating (an integer between 1300 and 1900).
+  - The first column is the problem's rating.
   - The second column is a boolean value (`True` or `False`) indicating whether you passed the problem.
 
 Example:

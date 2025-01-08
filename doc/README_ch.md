@@ -2,7 +2,7 @@
 
 [English version](../README.md)
 
-本项目旨在帮助 LeetCode 用户根据最近的解题表现估算其评分。程序使用 **Glicko-2 评分系统** 来计算估算评分，并提供估算的 95% 置信区间。
+本项目旨在帮助 LeetCode 用户根据最近的解题表现估算其 Leetcode rating。程序使用 **Glicko-2 评分系统** 来计算rating，并提供估算的 95% 置信区间。
 
 ## 使用方法
 
@@ -16,7 +16,9 @@ pip install numpy pyyaml
 ```
 
 ### 数据准备
-要估算你的 LeetCode 评分，你需要准备你的解题数据并将其放置在 `/data` 目录下。数据应为以下格式之一：
+要估算你的 LeetCode rating，你需要准备你的解题数据并将其放置在 `/data` 目录下。
+问题的难度分数据可以从[这里](https://zerotrac.github.io/leetcode_problem_rating/#/)找到。
+数据应为以下格式之一：
 
 #### YAML 格式
 - 文件名：`questions_data.yaml`
@@ -24,7 +26,7 @@ pip install numpy pyyaml
 - 数据格式：
   - 文件应包含一个键为 `data` 的字典列表。
   - 每个字典应包含两个键：
-    - `problem_rating`: 问题的评分（1300 到 1900 之间的整数）。
+    - `problem_rating`: 问题的难度分。
     - `passed`: 布尔值（`true` 或 `false`），表示你是否通过了该问题。
 
 示例：
@@ -43,7 +45,7 @@ data:
 - 文件位置：`/data/questions_data.csv`
 - 数据格式：
   - 每行代表你尝试过的一个问题。
-  - 第一列是问题的评分（1300 到 1900 之间的整数）。
+  - 第一列是问题难度分。
   - 第二列是布尔值（`True` 或 `False`），表示你是否通过了该问题。
 
 示例：
@@ -55,7 +57,7 @@ Score,Passed
 ```
 
 #### 生成测试数据
-如果你想在准备自己的数据之前测试程序，可以使用 `data_generator.py` 脚本生成随机测试数据。该脚本生成包含随机问题评分和通过/未通过标志的 CSV 和 YAML 文件。
+如果你想在准备自己的数据之前测试程序，可以使用 `data_generator.py` 脚本生成随机测试数据。该脚本生成包含随机问题难度分和通过/未通过标志的 CSV 和 YAML 文件。
 
 ```bash
 python src/data_generator.py
@@ -64,18 +66,18 @@ python src/data_generator.py
 默认情况下，脚本生成 100 个样本并将其保存到 `./data/test_data.csv` 和 `./data/test_data.yaml`。
 
 ### 估算 LeetCode 评分
-要根据生成的数据估算你的 LeetCode 评分，请使用 `main.py` 脚本：
+要根据生成的数据估算相应的 LeetCode rating，请使用 `main.py` 脚本：
 
 ```bash
 python src/main.py
 ```
 
-该脚本从 CSV 或 YAML 文件（默认为 YAML）中读取数据，并计算估算评分以及 95% 置信区间。
+该脚本从 CSV 或 YAML 文件（默认为 YAML）中读取数据，并计算rating以及 95% 置信区间。
 
 ### 自定义估算
 你可以通过修改 `main.py` 脚本中的参数来自定义估算过程：
 
-- `INITIAL_SCORE`: 开始估算的初始评分（默认：1580），建议将其设置为你的竞赛评分。
+- `INITIAL_SCORE`: 开始估算的初始rating（默认：1580），建议将其设置为你的contest rating。
 - `DATA_FILE`: 数据文件的路径（默认：`./data/questions_data.yaml`）。
 - `USE_GLICKO`: 决定是否使用 Glicko-2 系统的标志（默认：`True`）。如果设置为 `False`，将使用旧的 WGD 方法（不推荐）。
 
@@ -99,7 +101,7 @@ WGD 方法是一种旧的方法，使用加权梯度下降算法来估算评分�
 
 ## 文件结构
 
-- `src/`: 包含生成数据和估算评分的主要脚本。
+- `src/`: 包含生成数据和估算rating的主要脚本。
   - `data_generator.py`: 生成 CSV 和 YAML 格式的随机测试数据。
   - `glicko_estimate.py`: 实现 Glicko-2 评分系统。
   - `wgd_estimate.py`: 实现已弃用的 WGD 方法。
