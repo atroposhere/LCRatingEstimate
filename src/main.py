@@ -1,4 +1,4 @@
-from estimate import estimate_score_with_iteration, read_data_from_csv, read_data_from_yaml
+from wgd_estimate import estimate_score_with_wgd, read_data_from_csv, read_data_from_yaml
 
 # Constants
 INITIAL_SCORE = 1580
@@ -19,7 +19,7 @@ def main():
         data = read_data_from_yaml(DATA_FILE)
 
     # Estimate score
-    estimated_score, confidence_interval = estimate_score_with_iteration(
+    estimated_score, confidence_interval = estimate_score_with_wgd(
         data, initial_score=INITIAL_SCORE, learning_rate=LEARNING_RATE,
         max_iter=MAX_ITER, decay_factor=DECAY_FACTOR
     )

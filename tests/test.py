@@ -1,5 +1,5 @@
 import unittest
-from src.estimate import estimate_score_with_iteration, read_data_from_csv
+from wgd_estimate import estimate_score_with_wgd, read_data_from_csv
 
 
 class TestModel(unittest.TestCase):
@@ -7,7 +7,7 @@ class TestModel(unittest.TestCase):
     def test_estimate_score(self):
         # 使用模拟的测试数据
         data = [(1580, True), (1600, False), (1550, True)]
-        estimated_score, confidence_interval = estimate_score_with_iteration(
+        estimated_score, confidence_interval = estimate_score_with_wgd(
             data, initial_score=1580)
         self.assertGreater(estimated_score, 0)
         self.assertTrue(

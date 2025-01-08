@@ -6,7 +6,7 @@ import numpy as np
 def get_expected_score(score, actual_score):
     return 1 / (1 + 10 ** ((score - actual_score) / 400))
 
-def estimate_score_with_iteration(data, initial_score=1580, learning_rate=0.1, max_iter=10000, decay_factor=0.9):
+def estimate_score_with_wgd(data, initial_score=1580, learning_rate=0.1, max_iter=10000, decay_factor=0.9):
     score = initial_score
 
     # Perform first max_iter - 1 iterations
