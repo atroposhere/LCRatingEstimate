@@ -13,8 +13,49 @@ You can install the required packages using pip:
 pip install numpy pyyaml
 ```
 
-### Generating Test Data
-To generate random test data, you can use the `data_generator.py` script. This script generates both CSV and YAML files containing random problem scores and pass/fail flags.
+### Data Preparation
+To estimate your LeetCode rating, you need to prepare your problem-solving data and place it in the `/data` directory. The data should be in one of the following formats:
+
+#### YAML Format
+- File name: `questions_data.yaml`
+- File location: `/data/questions_data.yaml`
+- Data format:
+  - The file should contain a list of dictionaries under the key `data`.
+  - Each dictionary should have two keys:
+    - `topic_score`: The problem's rating (an integer between 1300 and 1900).
+    - `passed`: A boolean value (`true` or `false`) indicating whether you passed the problem.
+
+Example:
+```yaml
+data:
+  - topic_score: 1500
+    passed: true
+  - topic_score: 1600
+    passed: false
+  - topic_score: 1400
+    passed: true
+```
+
+#### CSV Format
+- File name: `questions_data.csv`
+- File location: `/data/questions_data.csv`
+- Data format:
+  - Each row represents a problem you have attempted.
+  - The first column is the problem's rating (an integer between 1300 and 1900).
+  - The second column is a boolean value (`True` or `False`) indicating whether you passed the problem.
+
+Example:
+```
+Score,Passed
+1500,True
+1600,False
+1400,True
+```
+
+
+
+#### Generating Test Data
+If you want to test the program before preparing your own data, you can generate random test data using the `data_generator.py` script. This script generates both CSV and YAML files containing random problem scores and pass/fail flags.
 
 ```bash
 python src/data_generator.py
