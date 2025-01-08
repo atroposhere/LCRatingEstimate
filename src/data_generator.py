@@ -58,5 +58,5 @@ def generate_random_data_yaml(num_samples=100, filename='./data/test_data.yaml')
 
 if __name__ == "__main__":
     # Generate both CSV and YAML data
-    # generate_random_data_csv()
+    generate_random_data_csv()
     generate_random_data_yaml()
