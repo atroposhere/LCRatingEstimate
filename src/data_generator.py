@@ -5,7 +5,7 @@ import yaml
 
 def generate_random_data_csv(num_samples=100, filename='./data/test_data.csv'):
     """Generate random question data and save to CSV file.
-    
+
     Args:
         num_samples (int): Number of samples to generate
         filename (str): Path to save the CSV file
@@ -29,7 +29,7 @@ def generate_random_data_csv(num_samples=100, filename='./data/test_data.csv'):
 
 def generate_random_data_yaml(num_samples=100, filename='./data/test_data.yaml'):
     """Generate random question data and save to YAML file.
-    
+
     Args:
         num_samples (int): Number of samples to generate
         filename (str): Path to save the YAML file

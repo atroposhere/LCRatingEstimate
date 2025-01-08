@@ -23,7 +23,8 @@ def estimate_score_with_iteration(data, initial_score=1580, learning_rate=0.1, m
             expected_rate = get_expected_score(topic_score, score)
 
             # Calculate and weight the error
-            diff = (actual_rate - expected_rate) * 400  # ELO rating update error
+            diff = (actual_rate - expected_rate) * \
+                400  # ELO rating update error
             total_diff += weight * diff
 
         # Update score using weighted gradient descent
