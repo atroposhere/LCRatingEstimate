@@ -64,21 +64,22 @@ python src/data_generator.py
 By default, the script generates 100 samples and saves them to `./data/test_data.csv` and `./data/test_data.yaml`.
 
 ### Estimating LeetCode Rating
-To estimate your LeetCode rating based on the generated data, use the `estimate.py` script:
+To estimate your LeetCode rating based on the generated data, use the `main.py` script:
 
 ```bash
-python src/estimate.py
+python src/main.py
 ```
 
 This script reads the data from either a CSV or YAML file (default is YAML) and calculates an estimated rating along with a 95% confidence interval.
 
 ### Customizing the Estimation
-You can customize the estimation process by modifying the parameters in the `estimate.py` script:
+You can customize the estimation process by modifying the parameters in the `main.py` script:
 
-- `initial_score`: The initial rating to start the estimation from (default: 1500), I recommend that you should set it to your contest rating.
-- `learning_rate`: The learning rate for the gradient descent algorithm (default: 0.1).
-- `max_iter`: The maximum number of iterations for the gradient descent algorithm (default: 1000).
-- `decay_factor`: The decay factor for weighting recent samples more heavily (default: 0.99).
+- `INITIAL_SCORE`: The initial rating to start the estimation from (default: 1580), I recommend that you should set it to your contest rating.
+- `LEARNING_RATE`: The learning rate for the gradient descent algorithm (default: 0.1).
+- `MAX_ITER`: The maximum number of iterations for the gradient descent algorithm (default: 2000).
+- `DECAY_FACTOR`: The decay factor for weighting recent samples more heavily (default: 0.99).
+- `DATA_FILE`: The path to the data file (default: `./data/questions_data.yaml`).
 
 ## Calculation Principle
 
@@ -102,6 +103,7 @@ The program uses a weighted ELO rating system to estimate the user's rating. The
 
 - `src/`: Contains the main scripts for generating data and estimating ratings.
   - `data_generator.py`: Generates random test data in CSV and YAML formats.
-  - `estimate.py`: Estimates the user's LeetCode rating based on the generated data.
+  - `estimate.py`: Contains the core logic for estimating the user's LeetCode rating.
+  - `main.py`: The main script to run the estimation process.
 - `tests/`: Contains test scripts.
 - `data/`: Contains data files.
