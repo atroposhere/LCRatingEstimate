@@ -3,9 +3,12 @@ from estimate import estimate_score_with_iteration, read_data_from_csv, read_dat
 # Constants
 INITIAL_SCORE = 1580
 LEARNING_RATE = 0.1
-MAX_ITER = 5000
-DECAY_FACTOR = 0.9
+MAX_ITER = 2000
+DECAY_FACTOR = 0.99
 DATA_FILE = './data/questions_data.yaml'  # or './data/questions_data.csv'
+# only for test
+# DATA_FILE = './data/test_data.csv'
+# DATA_FILE = './data/test_data.yaml'
 
 
 def main():
