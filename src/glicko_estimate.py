@@ -131,7 +131,7 @@ def estimate_score_with_glicko(data, initial_score=1580, initial_rd=350, initial
     Estimate the LeetCode rating using the Glicko-2 system.
 
     Args:
-        data (list): List of tuples (topic_score, passed_flag).
+        data (list): List of tuples (problem_rating, passed_flag).
         initial_score (float): The initial rating to start the estimation from.
         initial_rd (float): The initial rating deviation.
         initial_volatility (float): The initial rating volatility.
@@ -144,9 +144,9 @@ def estimate_score_with_glicko(data, initial_score=1580, initial_rd=350, initial
     volatility = initial_volatility
 
     results = []
-    for topic_score, passed_flag in data:
+    for problem_rating, passed_flag in data:
         outcome = 1 if passed_flag else 0
-        results.append((topic_score, MIN_RD, outcome))
+        results.append((problem_rating, MIN_RD, outcome))
 
     new_rating, new_rd, new_volatility = glicko2_update_rating(
         rating, rd, volatility, results)
@@ -166,7 +166,7 @@ def read_data_from_csv(filename='./data/questions_data.csv'):
         filename (str): Path to the CSV file.
 
     Returns:
-        list: List of tuples (topic_score, passed_flag).
+        list: List of tuples (problem_rating, passed_flag).
     """
     data = []
     with open(filename, mode='r') as file:
@@ -187,9 +187,9 @@ def read_data_from_yaml(filename='./data/questions_data.yaml'):
         filename (str): Path to the YAML file.
 
     Returns:
-        list: List of tuples (topic_score, passed_flag).
+        list: List of tuples (problem_rating, passed_flag).
     """
     with open(filename, 'r') as f:
         raw_data = yaml.safe_load(f)
-    data = [[item["topic_score"], item["passed"]] for item in raw_data["data"]]
+    data = [[item["problem_rating"], item["passed"]] for item in raw_data["data"]]
     return data

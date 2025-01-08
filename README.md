@@ -24,17 +24,17 @@ To estimate your LeetCode rating, you need to prepare your problem-solving data 
 - Data format:
   - The file should contain a list of dictionaries under the key `data`.
   - Each dictionary should have two keys:
-    - `topic_score`: The problem's rating (an integer between 1300 and 1900).
+    - `problem_rating`: The problem's rating (an integer between 1300 and 1900).
     - `passed`: A boolean value (`true` or `false`) indicating whether you passed the problem.
 
 Example:
 ```yaml
 data:
-  - topic_score: 1500
+  - problem_rating: 1500
     passed: true
-  - topic_score: 1600
+  - problem_rating: 1600
     passed: false
-  - topic_score: 1400
+  - problem_rating: 1400
     passed: true
 ```
 

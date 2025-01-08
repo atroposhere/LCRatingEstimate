@@ -24,17 +24,17 @@ pip install numpy pyyaml
 - 数据格式：
   - 文件应包含一个键为 `data` 的字典列表。
   - 每个字典应包含两个键：
-    - `topic_score`: 问题的评分（1300 到 1900 之间的整数）。
+    - `problem_rating`: 问题的评分（1300 到 1900 之间的整数）。
     - `passed`: 布尔值（`true` 或 `false`），表示你是否通过了该问题。
 
 示例：
 ```yaml
 data:
-  - topic_score: 1500
+  - problem_rating: 1500
     passed: true
-  - topic_score: 1600
+  - problem_rating: 1600
     passed: false
-  - topic_score: 1400
+  - problem_rating: 1400
     passed: true
 ```
 

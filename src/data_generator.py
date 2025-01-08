@@ -41,7 +41,7 @@ def generate_random_data_yaml(num_samples=100, filename='./data/test_data.yaml')
         # Randomly determine if question was passed
         passed_flag = random.choice([True, False])
         data.append({
-            'topic_score': score,
+            'problem_rating': score,
             'passed': passed_flag
         })
 

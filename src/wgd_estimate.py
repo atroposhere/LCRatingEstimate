@@ -12,10 +12,10 @@ def estimate_score_with_wgd(data, initial_score=1580, learning_rate=0.1, max_ite
     # Perform first max_iter - 1 iterations
     for iteration in range(max_iter - 1):
         total_diff = 0
-        for i, (topic_score, passed_flag) in enumerate(data):
+        for i, (problem_rating, passed_flag) in enumerate(data):
             weight = decay_factor ** (len(data) - i)
             actual_rate = 1 if passed_flag else 0
-            expected_rate = get_expected_score(topic_score, score)
+            expected_rate = get_expected_score(problem_rating, score)
             diff = (actual_rate - expected_rate) * 400
             total_diff += weight * diff
 
@@ -27,10 +27,10 @@ def estimate_score_with_wgd(data, initial_score=1580, learning_rate=0.1, max_ite
     weights = []
     total_diff = 0
 
-    for i, (topic_score, passed_flag) in enumerate(data):
+    for i, (problem_rating, passed_flag) in enumerate(data):
         weight = decay_factor ** (len(data) - i)
         actual_rate = 1 if passed_flag else 0
-        expected_rate = get_expected_score(topic_score, score)
+        expected_rate = get_expected_score(problem_rating, score)
         diff = (actual_rate - expected_rate) * 400
         total_diff += weight * diff
         weighted_squared_errors.append(diff ** 2)
@@ -62,5 +62,5 @@ def read_data_from_csv(filename='./data/questions_data.csv'):
 def read_data_from_yaml(filename='./data/questions_data.yaml'):
     with open(filename, 'r') as f:
         raw_data = yaml.safe_load(f)
-    data = [[item["topic_score"], item["passed"]] for item in raw_data["data"]]
+    data = [[item["problem_rating"], item["passed"]] for item in raw_data["data"]]
     return data
