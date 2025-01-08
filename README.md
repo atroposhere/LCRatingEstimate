@@ -1,6 +1,8 @@
-# LeetCode Rating Estimate tools
+# LeetCode Rating Estimate Tool
 
-This project is designed to help LeetCode users estimate their rating based on their recent problem-solving performance. The program uses a weighted ELO rating system to calculate an estimated rating and provides a 95% confidence interval for the estimate.
+[中文版](./doc/README_ch.md)
+
+This project is designed to help LeetCode users estimate their rating based on their recent problem-solving performance. The program uses the **Glicko-2 rating system** to calculate an estimated rating and provides a 95% confidence interval for the estimate.
 
 ## Usage
 
@@ -52,8 +54,6 @@ Score,Passed
 1400,True
 ```
 
-
-
 #### Generating Test Data
 If you want to test the program before preparing your own data, you can generate random test data using the `data_generator.py` script. This script generates both CSV and YAML files containing random problem scores and pass/fail flags.
 
@@ -76,34 +76,34 @@ This script reads the data from either a CSV or YAML file (default is YAML) and 
 You can customize the estimation process by modifying the parameters in the `main.py` script:
 
 - `INITIAL_SCORE`: The initial rating to start the estimation from (default: 1580), I recommend that you should set it to your contest rating.
-- `LEARNING_RATE`: The learning rate for the gradient descent algorithm (default: 0.1).
-- `MAX_ITER`: The maximum number of iterations for the gradient descent algorithm (default: 2000).
-- `DECAY_FACTOR`: The decay factor for weighting recent samples more heavily (default: 0.99).
 - `DATA_FILE`: The path to the data file (default: `./data/questions_data.yaml`).
+- `USE_GLICKO`: A flag to decide whether to use the Glicko-2 system (default: `True`). If set to `False`, the legacy WGD method will be used (not recommended).
 
 ## Calculation Principle
 
-The program uses a weighted ELO rating system to estimate the user's rating. The key steps in the calculation are as follows:
+### Glicko-2 Rating System
+The Glicko-2 system is an advanced rating system that improves upon traditional ELO by incorporating **rating deviation (RD)** and **volatility**. These factors allow the system to better handle uncertainty and provide more accurate estimates over time.
 
-1. **Expected Score Calculation**: The expected score for each problem is calculated using the ELO formula:
-   \[
-   E = \frac{1}{1 + 10^{\frac{(R_{\text{problem}} - R_{\text{user}})}{400}}}
-   \]
-   where \( R_{\text{problem}} \) is the problem's rating and \( R_{\text{user}} \) is the user's current estimated rating.
+1. **Rating and Rating Deviation**: Each user has a rating (μ) and a rating deviation (φ), which represents the uncertainty in their rating. A lower RD indicates higher confidence in the rating.
 
-2. **Weighted Gradient Descent**: The program uses a weighted gradient descent algorithm to iteratively update the user's rating. The weights are calculated based on the order of the samples, with more recent samples having higher weights. The weight for each sample is calculated as:
-   \[
-   w_i = \text{decay\_factor}^{N - i}
-   \]
-   where \( N \) is the total number of samples and \( i \) is the index of the sample.
+2. **Volatility**: This measures how much a user's rating fluctuates over time. High volatility suggests that the user's performance is inconsistent.
 
-3. **Confidence Interval Calculation**: After the final iteration, the program calculates a 95% confidence interval for the estimated rating. The confidence interval is calculated using the weighted standard error of the estimates.
+3. **Expected Outcome**: The expected outcome between two players (or a user and a problem) is calculated using a logistic function that considers both ratings and their deviations.
+
+4. **Rating Update**: After each problem attempt, the user's rating, RD, and volatility are updated based on the outcome. The system uses an iterative algorithm to ensure that the updates are statistically sound.
+
+5. **Confidence Interval**: The 95% confidence interval is calculated using the updated rating and RD, providing a range within which the user's true rating is likely to fall.
+
+### Weighted Gradient Descent (WGD) Method
+The WGD method is a legacy approach that uses a weighted gradient descent algorithm to estimate ratings. It incorporates a decay factor to prioritize recent data. But it encounted problems because of the sparse data. As such, it is not recommended for use.
 
 ## File Structure
 
 - `src/`: Contains the main scripts for generating data and estimating ratings.
   - `data_generator.py`: Generates random test data in CSV and YAML formats.
-  - `estimate.py`: Contains the core logic for estimating the user's LeetCode rating.
+  - `glicko_estimate.py`: Implements the Glicko-2 rating system.
+  - `wgd_estimate.py`: Implements the deprecated WGD method.
   - `main.py`: The main script to run the estimation process.
 - `tests/`: Contains test scripts.
 - `data/`: Contains data files.
+```
