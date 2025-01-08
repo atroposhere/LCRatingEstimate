@@ -106,4 +106,3 @@ The WGD method is a legacy approach that uses a weighted gradient descent algori
   - `main.py`: The main script to run the estimation process.
 - `tests/`: Contains test scripts.
 - `data/`: Contains data files.
-```
