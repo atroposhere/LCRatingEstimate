@@ -33,8 +33,8 @@ def main():
 
         # Output Glicko results
         print(f"\nGlicko Final Estimated Score: {estimated_score:.2f}")
-        print(f"Glicko 95% Confidence Interval: ({confidence_interval[0]:.2f}, {
-              confidence_interval[1]:.2f})")
+        print(f"Glicko 95% Confidence Interval: \
+              ({confidence_interval[0]:.2f}, {confidence_interval[1]:.2f})")
     else:
         # Estimate score using WGD
         print("Estimating score using WGD...")
@@ -45,8 +45,8 @@ def main():
 
         # Output WGD results
         print(f"\nWGD Final Estimated Score: {estimated_score:.2f}")
-        print(f"WGD 95% Confidence Interval: ({confidence_interval[0]:.2f}, {
-              confidence_interval[1]:.2f})")
+        print(f"WGD 95% Confidence Interval: \
+              ({confidence_interval[0]:.2f}, {confidence_interval[1]:.2f})")
 
 
 if __name__ == "__main__":

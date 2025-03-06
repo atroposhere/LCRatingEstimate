@@ -3,8 +3,10 @@ import math
 import yaml
 import numpy as np
 
+
 def get_expected_score(score, actual_score):
     return 1 / (1 + 10 ** ((score - actual_score) / 400))
+
 
 def estimate_score_with_wgd(data, initial_score=1580, learning_rate=0.1, max_iter=10000, decay_factor=0.9):
     score = initial_score
@@ -44,9 +46,11 @@ def estimate_score_with_wgd(data, initial_score=1580, learning_rate=0.1, max_ite
     weighted_squared_errors = weighted_squared_errors * weights
     weighted_variance = weighted_squared_errors.sum() / weights.sum()
     standard_error = math.sqrt(weighted_variance) / math.sqrt(len(data))
-    confidence_interval = (score - 1.96 * standard_error, score + 1.96 * standard_error)
+    confidence_interval = (score - 1.96 * standard_error,
+                           score + 1.96 * standard_error)
 
     return score, confidence_interval
+
 
 def read_data_from_csv(filename='./data/questions_data.csv'):
     data = []
@@ -59,8 +63,10 @@ def read_data_from_csv(filename='./data/questions_data.csv'):
             data.append((score, passed_flag))
     return data
 
+
 def read_data_from_yaml(filename='./data/questions_data.yaml'):
     with open(filename, 'r') as f:
         raw_data = yaml.safe_load(f)
-    data = [[item["problem_rating"], item["passed"]] for item in raw_data["data"]]
+    data = [[item["problem_rating"], item["passed"]]
+            for item in raw_data["data"]]
     return data
